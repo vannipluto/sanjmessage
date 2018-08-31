@@ -24,6 +24,13 @@ $text = strtolower($text);
 if($text == "/start") {
   // start bot esco e non inoltro
   exit;
+} else ($text == "/info") {
+    header("Content-Type: application/json");
+    $parameters = array('chat_id' => $chatId, "text" => "Questo bot inotra tutti i tipi di messaggi inviati qui direttamente a Sanj per la gestione della Rubrica ^^");
+    $parameters["method"] = "sendMessage";
+    echo json_encode($parameters);
+  
+  exit;
 }
 
 $botUrl = "https://api.telegram.org/bot" . BOT_TOKEN . "/forwardMessage";
