@@ -18,8 +18,8 @@ $username = isset($message['chat']['username']) ? $message['chat']['username'] :
 $date = isset($message['date']) ? $message['date'] : "";
 $text = isset($message['text']) ? $message['text'] : "";
 
-$text = trim($text);
-$text = strtolower($text);
+// $text = trim($text);
+// $text = strtolower($text);
 
 $botUrl = "https://api.telegram.org/bot" . BOT_TOKEN . "/forwardMessage";
 
@@ -41,9 +41,14 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, $postFieldsForFW);
 // read curl response
 $output = curl_exec($ch);
 
+$responseFW = "Messaggio inotrato, grazie!";
+
+if(!$output['ok']) {
+    $responseFW = "Messaggio non inviato, riprova piu' tardi ... :(";
+}
 
 header("Content-Type: application/json");
-$parameters = array('chat_id' => $chatId, "text" => $output);
+$parameters = array('chat_id' => $chatId, "text" => $responseFW);
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
 ?>
