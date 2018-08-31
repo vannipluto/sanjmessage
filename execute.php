@@ -30,7 +30,7 @@ $botUrl = "https://api.telegram.org/bot" . BOT_TOKEN . "/forwardMessage";
 // from_chat_id: Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
 // message_id: Message identifier in the chat specified in from_chat_id
 
-$postFieldsForFW = array('chat_id' => '1288350784', 'from_chat_id' => $chatId, 'message_id' => $messageId);
+$postFieldsForFW = array('chat_id' => '@TestMessaggiPerSanji', 'from_chat_id' => $chatId, 'message_id' => $messageId);
 
 $ch = curl_init(); 
 curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:multipart/form-data"));
