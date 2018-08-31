@@ -18,8 +18,13 @@ $username = isset($message['chat']['username']) ? $message['chat']['username'] :
 $date = isset($message['date']) ? $message['date'] : "";
 $text = isset($message['text']) ? $message['text'] : "";
 
-// $text = trim($text);
-// $text = strtolower($text);
+$text = trim($text);
+$text = strtolower($text);
+
+if($text == "/start") {
+  // start bot esco e non inoltro
+  exit;
+}
 
 $botUrl = "https://api.telegram.org/bot" . BOT_TOKEN . "/forwardMessage";
 
