@@ -24,7 +24,7 @@ $text = strtolower($text);
 if($text == "/start") {
   // start bot esco e non inoltro
   exit;
-} else ($text == "/info") {
+} else if($text == "/info") {
     header("Content-Type: application/json");
     $parameters = array('chat_id' => $chatId, 'text' => 'Questo bot inotra tutti i tipi di messaggi inviati qui direttamente a Sanj per la gestione della Rubrica.');
     $parameters["method"] = "sendMessage";
