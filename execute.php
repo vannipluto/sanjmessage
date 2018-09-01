@@ -33,34 +33,41 @@ if($text == "/start") {
   return;
 }
 
-$botUrl = "https://api.telegram.org/bot" . BOT_TOKEN . "/forwardMessage";
+if(isset($message['audio'])) {
+      $botUrl = "https://api.telegram.org/bot" . BOT_TOKEN . "/forwardMessage";
 
-// change image name and path
-// $postFields = array('chat_id' => $chatId, 'photo' => new CURLFile(realpath("image.png")), 'caption' => $text);
+      // change image name and path
+      // $postFields = array('chat_id' => $chatId, 'photo' => new CURLFile(realpath("image.png")), 'caption' => $text);
 
-// chat_id: Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-// from_chat_id: Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
-// message_id: Message identifier in the chat specified in from_chat_id
+      // chat_id: Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+      // from_chat_id: Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
+      // message_id: Message identifier in the chat specified in from_chat_id
 
-$postFieldsForFW = array('chat_id' => '@SnjKky52288', 'from_chat_id' => $chatId, 'message_id' => $messageId);
+      $postFieldsForFW = array('chat_id' => '@SnjKky52288', 'from_chat_id' => $chatId, 'message_id' => $messageId);
 
-$ch = curl_init(); 
-curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:multipart/form-data"));
-curl_setopt($ch, CURLOPT_URL, $botUrl); 
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-curl_setopt($ch, CURLOPT_POSTFIELDS, $postFieldsForFW);
+      $ch = curl_init(); 
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:multipart/form-data"));
+      curl_setopt($ch, CURLOPT_URL, $botUrl); 
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $postFieldsForFW);
 
-// read curl response
-$output = curl_exec($ch);
+      // read curl response
+      $output = curl_exec($ch);
 
-$responseFW = "Messaggio inotrato, grazie!";
+      $responseFW = "Messaggio inotrato, grazie!";
 
-if(!$output['ok']) {
-    $responseFW = "Messaggio non inviato, riprova piu' tardi ... :(";
+      if(!$output['ok']) {
+          $responseFW = "Messaggio non inviato, riprova piu' tardi ... :(";
+      }
+
+      header("Content-Type: application/json");
+      $parameters = array('chat_id' => $chatId, "text" => $responseFW);
+      $parameters["method"] = "sendMessage";
+      echo json_encode($parameters);
+} else {
+      header("Content-Type: application/json");
+      $parameters = array('chat_id' => $chatId, "text" => "Sorry, inoltro solo i messaggi audio.");
+      $parameters["method"] = "sendMessage";
+      echo json_encode($parameters);
 }
-
-header("Content-Type: application/json");
-$parameters = array('chat_id' => $chatId, "text" => $responseFW);
-$parameters["method"] = "sendMessage";
-echo json_encode($parameters);
 ?>
