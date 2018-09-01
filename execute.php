@@ -26,7 +26,7 @@ if($text == "/start") {
   exit;
 } else if($text == "/info") {
     header("Content-Type: application/json");
-    $parameters = array('chat_id' => $chatId, 'text' => 'Questo bot inotra tutti i tipi di messaggi inviati qui direttamente a Sanj per la gestione della Rubrica.');
+    $parameters = array('chat_id' => $chatId, 'text' => 'Questo bot inoltra i vostri messaggi vocali direttamente a Sanji e Chicca per il format su twitch. Vi basta registrare il messaggio e il gioco è fatto! I più belli saranno trasmessi durante Lo Sfogo!');
     $parameters["method"] = "sendMessage";
     echo json_encode($parameters);
   
