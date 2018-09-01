@@ -33,7 +33,7 @@ if($text == "/start") {
   return;
 }
 
-if(isset($message['audio'])) {
+if(isset($message['voice'])) {
       $botUrl = "https://api.telegram.org/bot" . BOT_TOKEN . "/forwardMessage";
 
       // change image name and path
@@ -66,7 +66,7 @@ if(isset($message['audio'])) {
       echo json_encode($parameters);
 } else {
       header("Content-Type: application/json");
-      $parameters = array('chat_id' => $chatId, "text" => "Sorry, inoltro solo i messaggi audio.");
+      $parameters = array('chat_id' => $chatId, "text" => "Sorry, inoltro solo i messaggi vocali.");
       $parameters["method"] = "sendMessage";
       echo json_encode($parameters);
 }
